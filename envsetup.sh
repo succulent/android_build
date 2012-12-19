@@ -120,10 +120,6 @@ function setpaths()
     prebuiltdir=$(getprebuilt)
     gccprebuiltdir=$(get_abs_build_var ANDROID_GCC_PREBUILTS)
 
-    # defined in core/config.mk
-    targetgccversion=$(get_build_var TARGET_GCC_VERSION)
-    export TARGET_GCC_VERSION=$targetgccversion
-
     # The gcc toolchain does not exists for windows/cygwin. In this case, do not reference it.
     export ANDROID_EABI_TOOLCHAIN=
     local ARCH=$(get_build_var TARGET_ARCH)
