@@ -411,6 +411,14 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("backup")
 
   script.ShowProgress(0.5, 0)
+  script.Print("")
+  script.Print("")
+  script.Print("   //XY Experimental ROM   ")
+  script.Print("")
+  script.Print("www.xylon.androidvenue.com ")
+  script.Print("")
+  script.Print("")
+  script.Print("Installing system files...")
 
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
@@ -422,6 +430,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Mount("/system")
   script.UnpackPackageDir("system", "/system")
 
+  script.Print("Symlinks and permissions...")
   symlinks = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
@@ -440,6 +449,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
+  script.Print("Flashing 666 KERNEL...")
+  script.Print("It'll destroy your CPU. Panic now!")
   script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)

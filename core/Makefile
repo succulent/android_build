@@ -1212,7 +1212,7 @@ else
     $(INTERNAL_OTA_PACKAGE_TARGET): skip_assert := false
 endif
 
-ifeq ($(XY_BUILD),true)
+ifneq ($(XY_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
