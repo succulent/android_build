@@ -1,7 +1,7 @@
 # Board platforms lists to be used for
 # TARGET_BOARD_PLATFORM specific featurization
 
-ifeq ($(HAS_PREBUILT_KERNEL),true)
+ifndef TARGET_USE_PREBUILT_KERNEL
 QCOM_BOARD_PLATFORMS := msm7627_surf
 QCOM_BOARD_PLATFORMS += msm7627_6x
 QCOM_BOARD_PLATFORMS += msm7627a
