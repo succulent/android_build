@@ -411,14 +411,15 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("backup")
 
   script.ShowProgress(0.5, 0)
-  script.Print("")
-  script.Print("")
-  script.Print("   //XY Experimental ROM   ")
-  script.Print("")
-  script.Print("www.xylon.androidvenue.com ")
-  script.Print("")
-  script.Print("")
-  script.Print("Installing system files...")
+  script.Print("*************************************")
+  script.Print("** ==   ==  ===    ===  ========   **")
+  script.Print("**  == ==    ===  ===   ==         **")
+  script.Print("**   ===       ====     ======     **")
+  script.Print("**  == ==       ==      ==         **")
+  script.Print("** ==   ==      ==      ========   **")
+  script.Print("**     XYLON EXPERIMENTAL ROM      **")
+  script.Print("**  http://xylon.androidvenue.com  **")
+  script.Print("*************************************")
 
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
@@ -449,8 +450,9 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
-  script.Print("Flashing 666 KERNEL...")
-  script.Print("It'll destroy your CPU. Panic now!")
+  script.Print("Flashing LeanKernel...")
+  script.Print("We think minimal and safety. Enjoy your pure butta!")
+  script.Print(".-.-..-CL3AnUP T1M3-.-..-.-")
   script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
