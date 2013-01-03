@@ -450,8 +450,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
-  script.Print("Flashing LeanKernel...")
-  script.Print("We think minimal and safety. Enjoy your pure butta!")
+  script.Print("We think of minimal and safety. Enjoy your pure butta!")
   script.Print(".-.-..-CL3AnUP T1M3-.-..-.-")
   script.WriteRawImage("/boot", "boot.img")
 
