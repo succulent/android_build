@@ -60,12 +60,12 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^aokp_") ; then
-       AOKP_PRODUCT=$(echo -n $1 | sed -e 's/^aokp_//g')
+    if (echo -n $1 | grep -q -e "^xylon_") ; then
+       XYLON_PRODUCT=$(echo -n $1 | sed -e 's/^xylon_//g')
     else
-       AOKP_PRODUCT=
+       XYLON_PRODUCT=
     fi
-      export AOKP_PRODUCT
+      export XYLON_PRODUCT
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
         TARGET_PRODUCT=$1 \
