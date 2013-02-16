@@ -423,7 +423,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Print("***************************************")
 
   script.Print("***************************************")
-  script.Print("**         INSTALLATION TIME         **")
+  script.Print("**      -=FLASHING & CLEANING=-      **")
   script.Print("***************************************")
   script.Print("**        Installing : v2.1.0        **")
   script.Print("**                                   **")
@@ -444,7 +444,9 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Mount("/system")
   script.UnpackPackageDir("system", "/system")
 
-  script.Print("Symlinks and permissions...")
+  script.Print("***************************************")
+  script.Print("** SYMLINKS AND PERMISSIONS. . .     **")
+  script.Print("***************************************")
   symlinks = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
 
@@ -463,11 +465,15 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
-  script.Print("We think of minimal and safety. Enjoy your pure butta!")
-  script.Print(".-.-..-CL3AnUP T1M3-.-..-.-")
+  script.Print("***************************************")
+  script.Print("**  FLASHING BOOT.IMG. . .           **")
+  script.Print("***************************************")
   script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
+  script.Print("***************************************")
+  script.Print("**  INSTALLATION COMPLETED. . .      **")
+  script.Print("***************************************")
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:
