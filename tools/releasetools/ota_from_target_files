@@ -418,8 +418,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Print("**    == ==       ==      ==         **")
   script.Print("**   ==   ==      ==      ========   **")
   script.Print("**       XYLON EXPERIMENTAL ROM      **")
-  script.Print("**    http://xylon.androidvenue.com  **")
-  script.Print("**    Kanged. Simple. Fast. Smooth.  **")
+  script.Print("**   http://xylon.androidvenue.com   **")
+  script.Print("**   Kanged. Simple. Fast. Smooth.   **")
   script.Print("***************************************")
 
   script.Print("***************************************")
@@ -430,7 +430,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Print("** Please feel free to support us at **")
   script.Print("**   // @ XDA // @ G+ Community //   **")
   script.Print("**   //      and @ Twitter      //   **")
-  script.Print("**                                   **")
   script.Print("**                                   **")
   script.Print("***************************************")
 
