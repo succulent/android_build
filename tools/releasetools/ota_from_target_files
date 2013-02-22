@@ -445,7 +445,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.UnpackPackageDir("system", "/system")
 
   script.Print("***************************************")
-  script.Print("** SYMLINKS AND PERMISSIONS. . .     **")
+  script.Print("**  SYMLINKS AND PERMISSIONS. . .    **")
   script.Print("***************************************")
   symlinks = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
