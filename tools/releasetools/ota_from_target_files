@@ -430,7 +430,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Print("** Please feel free to support us at **")
   script.Print("**   // @ XDA // @ G+ Community //   **")
   script.Print("**   //      and @ Twitter      //   **")
-  script.Print("**                                   **")
   script.Print("***************************************")
 
   if OPTIONS.wipe_user_data:
