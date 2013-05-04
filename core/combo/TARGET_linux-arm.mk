@@ -43,7 +43,7 @@ include $(TARGET_ARCH_SPECIFIC_MAKEFILE)
 
 # You can set TARGET_TOOLS_PREFIX to get gcc from somewhere else
 ifeq ($(strip $(TARGET_TOOLS_PREFIX)),)
-TARGET_TOOLCHAIN_ROOT := prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/arm-linux-androideabi-4.6
+TARGET_TOOLCHAIN_ROOT := prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/$(ANDROID_EABI_TOOLCHAIN_DIR)
 TARGET_TOOLS_PREFIX := $(TARGET_TOOLCHAIN_ROOT)/bin/arm-linux-androideabi-
 endif
 
@@ -66,10 +66,17 @@ endif
 
 TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
-TARGET_arm_CFLAGS :=    -O2 \
-                        -fomit-frame-pointer \
-                        -fstrict-aliasing    \
-                        -funswitch-loops
+TARGET_arm_CFLAGS :=	-O2 \
+						-fgcse-after-reload \
+						-fipa-cp-clone \
+						-fpredictive-commoning \
+						-fsched-spec-load \
+						-funswitch-loops \
+						-fvect-cost-model \
+						-fomit-frame-pointer \
+						-fstrict-aliasing \
+						-Wstrict-aliasing=3 \
+						-Werror=strict-aliasing
 
 # Modules can choose to compile some source as thumb. As
 # non-thumb enabled targets are supported, this is treated
@@ -77,12 +84,27 @@ TARGET_arm_CFLAGS :=    -O2 \
 # compiled as ARM.
 ifeq ($(ARCH_ARM_HAVE_THUMB_SUPPORT),true)
 TARGET_thumb_CFLAGS :=  -mthumb \
-                        -Os \
-                        -fomit-frame-pointer \
-                        -fno-strict-aliasing
+						-Os \
+						-fgcse-after-reload \
+						-fipa-cp-clone \
+						-fpredictive-commoning \
+						-fsched-spec-load \
+						-funswitch-loops \
+						-fvect-cost-model \
+						-fomit-frame-pointer \
+						-fstrict-aliasing \
+						-Wstrict-aliasing=3 \
+						-Werror=strict-aliasing
 else
 TARGET_thumb_CFLAGS := $(TARGET_arm_CFLAGS)
 endif
+
+# Turn off strict-aliasing if we're building an AOSP variant without the
+# patchset...
+ifeq ($(DEBUG_NO_STRICT_ALIASING),yes)
+TARGET_arm_CFLAGS += -fno-strict-aliasing -Wno-error=strict-aliasing
+TARGET_thumb_CFLAGS += -fno-strict-aliasing -Wno-error=strict-aliasing
+endif 
 
 # Set FORCE_ARM_DEBUGGING to "true" in your buildspec.mk
 # or in your environment to force a full arm build, even for
@@ -122,11 +144,11 @@ android_config_h := $(call select-android-config-h,linux-arm)
 TARGET_ANDROID_CONFIG_CFLAGS := -include $(android_config_h) -I $(dir $(android_config_h))
 TARGET_GLOBAL_CFLAGS += $(TARGET_ANDROID_CONFIG_CFLAGS)
 
-# This warning causes dalvik not to build with gcc 4.6.x and -Werror.
+# This warning causes dalvik not to build with gcc 4.6.x/4.7.x/4.8.x/4.9.x and -Werror. 
 # We cannot turn it off blindly since the option is not available
 # in gcc-4.4.x.  We also want to disable sincos optimization globally
 # by turning off the builtin sin function.
-ifneq ($(filter 4.6 4.6.%, $(shell $(TARGET_CC) --version)),)
+ifneq ($(filter 4.6 4.7 4.8 4.9 4.6.% 4.7.% 4.8.% 4.9.%, $(shell $(TARGET_CC) --version)),)
 TARGET_GLOBAL_CFLAGS += -Wno-unused-but-set-variable -fno-builtin-sin \
 			-fno-strict-volatile-bitfields
 endif
@@ -165,7 +187,8 @@ TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
 TARGET_RELEASE_CFLAGS := \
 			-DNDEBUG \
 			-g \
-			-Wstrict-aliasing=2 \
+			-Wstrict-aliasing=3 \
+			-Werror=strict-aliasing \
 			-fgcse-after-reload \
 			-frerun-cse-after-loop \
 			-frename-registers

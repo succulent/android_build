@@ -11,9 +11,9 @@ endif
 
 # Add the ARM toolchain bin dir if it actually exists
 ifeq ($(TARGET_ARCH),arm)
-    ifneq ($(wildcard $(PWD)/prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/arm-linux-androideabi-4.6/bin),)
+    ifneq ($(wildcard $(PWD)/prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/$(ANDROID_EABI_TOOLCHAIN_DIR)/bin),)
         # this should be copied to HOST_OUT_EXECUTABLES instead
-        ABP:=$(ABP):$(PWD)/prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/arm-linux-androideabi-4.6/bin
+        ABP:=$(ABP):$(PWD)/prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/$(ANDROID_EABI_TOOLCHAIN_DIR)/bin
     endif
 else ifeq ($(TARGET_ARCH),x86)
 
@@ -101,5 +101,7 @@ $(info   HOST_OS_EXTRA=$(HOST_OS_EXTRA))
 $(info   HOST_BUILD_TYPE=$(HOST_BUILD_TYPE))
 $(info   BUILD_ID=$(BUILD_ID))
 $(info   OUT_DIR=$(OUT_DIR))
+$(info   ANDROID_EABI_TOOLCHAIN=$(ANDROID_EABI_TOOLCHAIN))
+$(info   ARM_EABI_TOOLCHAIN=$(ARM_EABI_TOOLCHAIN))
 $(info ============================================)
 endif

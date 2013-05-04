@@ -228,6 +228,16 @@ ifeq ($(TARGET_CPU_ABI),)
 endif
 TARGET_CPU_ABI2 := $(strip $(TARGET_CPU_ABI2))
 
+# default target ARM_EABI_TOOLCHAIN
+ifeq ($(ARM_EABI_TOOLCHAIN_DIR),)
+  ARM_EABI_TOOLCHAIN_DIR := arm-eabi-4.6
+endif
+
+# default target ANDROID_EABI_TOOLCHAIN
+ifeq ($(ANDROID_EABI_TOOLCHAIN_DIR),)
+  ANDROID_EABI_TOOLCHAIN_DIR := arm-linux-androideabi-4.6
+endif
+
 # $(1): os/arch
 define select-android-config-h
 build/core/combo/include/arch/$(1)/AndroidConfig.h
